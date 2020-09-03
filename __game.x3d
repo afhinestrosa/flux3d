@@ -1,0 +1,29 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<X3D version = '3.0' profile = 'Full'>
+  <ExecutionContext>
+    <DirectionalLight intensity = '0.5' ambientIntensity = '0.1' color = '0.5 0.5 0.7' direction = '0 -1 0'/>
+    <!-- Esta es la luz controlada por HTML -->
+    <DirectionalLight DEF = 'ceiling' on = 'false' color = '1 0.9 1' direction = '0 -1 0'/>
+
+    <!-- Sensores de clic de ratón y de teclado -->
+    <TouchSensor DEF = 'mouse'/>
+    <KeySensor DEF = 'keyboard'/>
+
+    <!-- Grupos dinámicos (para crear y eliminar nodos de la escena desde el script) -->
+    <Group DEF = 'dynamic'/>
+    <Group DEF = 'viewpoints'/>
+
+    <!-- El juego -->
+    <Script DEF = 'game' directOutput = 'true' url = '__game.js'>
+      <field accessType = 'inputOnly' name = 'setup' type = 'SFBool'/>
+      <field accessType = 'inputOnly' name = 'walk' type = 'SFString'/>
+      <field accessType = 'inputOnly' name = 'select' type = 'SFBool'/>
+      <field accessType = 'inputOnly' name = 'move' type = 'SFBool'/>
+      <field accessType = 'outputOnly' name = 'signal' type = 'SFString'/>
+    </Script>
+
+    <!-- Rutas necesarias para comunicarse con el juego -->
+    <ROUTE fromNode = 'mouse' fromField = 'isActive' toNode = 'game' toField = 'select'/>
+    <ROUTE fromNode = 'keyboard' fromField = 'keyPress' toNode = 'game' toField = 'walk'/>
+  </ExecutionContext>
+</X3D>
